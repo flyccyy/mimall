@@ -6,14 +6,13 @@
 <script>
 export default {
   // mounted(){
-  //   let url = "https://www.imooc.com/search/hotwords"
+  //   let url = "/api/activity/servicetime"
   //   // let url = "https://www.imooc.com/activity/servicetime"
   //   // jsonp(url,(err,data)=>{
   //   //   console.log(err,data);
   //   // })
   //   axios({
-  //     url,
-  //     method:'post'
+  //     url
   //   }).then(()=>{
 
   //   })

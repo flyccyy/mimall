@@ -4,11 +4,13 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import env from '@/env'
 
-Vue.use(VueAxios, axios);
+// Vue.use(VueAxios,axios);
 
 //根据前端的跨域方式做调整
-axios.defaults.baseURL = '/api';
+// axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = env.baseURL;
 axios.defaults.timeout = 8000;
 
 // 添加请求拦截器
@@ -33,7 +35,7 @@ axios.interceptors.response.use(function (response) {
     //真正的报错
     alert(res.msg);
   }
-  return response;
+  // return response;
 }, function (error) {
   // 对响应错误做点什么
   return Promise.reject(error);
