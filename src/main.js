@@ -6,6 +6,8 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import env from '@/env'
+import VueLazyLoad from 'vue-lazyload'
+
 Vue.prototype.$axios = axios;
 
 const mock = false;
@@ -52,6 +54,9 @@ Vue.filter('priceFormat', function (val) {
 })
 
 // Vue.use(VueAxios,axios);
+Vue.use(VueLazyLoad,{
+  loading:'/imgs/loading-svg/loading-bars.svg'
+})
 Vue.config.productionTip = false
 
 new Vue({

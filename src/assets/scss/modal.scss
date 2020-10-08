@@ -10,6 +10,9 @@
   &.slide-enter-active{
     top:0;
   }
+  &.slide-leave-to {
+    top:0;
+  }
   &.slide-leave-active{
     top:-100%;
   }
