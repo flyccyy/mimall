@@ -12,7 +12,7 @@ import navFooter from '@/components/NavFooter.vue'
 export default {
   name:'home',
   components:{
-    navHeader,
+    navHeader,  
     navFooter
   }
 }

@@ -5,7 +5,7 @@ module.exports = {
     proxy:{
       //请求的地址统一加上/api，这样可以统一
       '/api':{
-        target:'https://www.imooc.com',
+        target:'http://mall-pre.springboot.cn',
         changeOrigin:true,
         pathRewrite:{
           '/api':''
