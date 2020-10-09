@@ -286,7 +286,7 @@ export default {
 	},
 	mounted() {
     this.init();
-    this.getUser();
+    // this.getUser();
     this.getCartCount();
 	},
 	methods: {

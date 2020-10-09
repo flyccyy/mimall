@@ -5,9 +5,13 @@ import actions from './actions'
 Vue.use(Vuex)
 
 const state = {
-  username:'',
+  userInfo:JSON.parse(window.sessionStorage.getItem('userInfo')),
   cartCount:0
 }
+// const state = {
+//   username:'',
+//   cartCount:0
+// }
 export default new Vuex.Store({
   state,
   mutations,
