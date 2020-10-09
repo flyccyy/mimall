@@ -7,6 +7,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import env from '@/env'
 import VueLazyLoad from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 
 Vue.prototype.$axios = axios;
 
@@ -19,6 +20,9 @@ if (mock) {
 axios.defaults.baseURL = '/api';
 // axios.defaults.baseURL = env.baseURL;
 axios.defaults.timeout = 8000;
+// 允许携带cookie
+axios.withCredentials = true;
+axios.defaults.withCredentials=true;
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
@@ -37,7 +41,11 @@ axios.interceptors.response.use(function (response) {
     return res.data;
     //10是未登录
   } else if (res.status == 10) {
-    router.push('/login')
+    //如果是首页，未登录也可以访问，其他页面必须登录才行
+    // if(location.hash != '#/index') {
+      router.push('/login')
+    // }
+    
   } else {
     //真正的报错
     alert(res.msg);
@@ -57,6 +65,7 @@ Vue.filter('priceFormat', function (val) {
 Vue.use(VueLazyLoad,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })
+Vue.use(VueCookie)
 Vue.config.productionTip = false
 
 new Vue({

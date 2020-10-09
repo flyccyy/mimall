@@ -202,7 +202,7 @@
         </a>
       </div>
       <div class="banner">
-        <a href="/#/product/30">
+        <a href="/#/product/30" @click="getUser">
           <img v-lazy="'/imgs/banner-1.png'" alt />
         </a>
       </div>
@@ -235,7 +235,15 @@
       </div>
     </div>
     <service-bar></service-bar>
-    <modal title="提示" sureText="查看购物车" btnType="2" modalType="middle" :showModal="showModal" @submit="gotoCart" @cancel="showModal=false">
+    <modal
+      title="提示"
+      sureText="查看购物车"
+      btnType="2"
+      modalType="middle"
+      :showModal="showModal"
+      @submit="gotoCart"
+      @cancel="showModal=false"
+    >
       <template v-slot:body>添加购物车</template>
     </modal>
   </div>
@@ -273,28 +281,43 @@ export default {
 				}
 			},
 			phoneList: [],
-			showModal: false
+      showModal: false,
 		}
 	},
 	mounted() {
-		this.init()
+    this.init();
+    this.getUser();
+    this.getCartCount();
 	},
 	methods: {
+		getUser() {
+      //这是获取用户信息的，跟头条移动端不一样，这个不是存到本地，而是直接重新请求
+			this.$axios.get('/user').then(res => {
+        // console.log(res)
+        this.$store.dispatch('saveUserName',res.username)
+			})
+    },
+    getCartCount(){
+      this.$axios.get('/carts/products/sum').then((res)=>{
+        console.log(res);
+        this.$store.dispatch('saveCartCount',res)
+      })
+    },
 		addCart(id) {
-      this.showModal = true;
-      return;
-      // this.$axios.post('/carts',{
-      //   productId:id,
-      //   selected:true
-      // }).then(res=>{
+			this.showModal = true
+			return
+			// this.$axios.post('/carts',{
+			//   productId:id,
+			//   selected:true
+			// }).then(res=>{
 
-      // }).catch(err=>{
+			// }).catch(err=>{
 
-      // })
-    },
-    gotoCart(val){
-      console.log(val);
-    },
+			// })
+		},
+		gotoCart(val) {
+			console.log(val)
+		},
 		init() {
 			this.$axios
 				.get('/products', {

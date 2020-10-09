@@ -3,7 +3,7 @@
     <div class="nav-topbar">
       <div class="container">
         <div class="topbar-menu">
-          <a href="javascript:;">小米商城</a>
+          <a href="javascript:;" ref="xiaomi">小米商城</a>
           <a href="javascript:;">MUI</a>
           <a href="javascript:;">云服务</a>
           <a href="javascript:;">协议规则</a>
@@ -12,7 +12,7 @@
           <a href="javascript:;" v-if="username">{{username}}</a>
           <a href="javascript:;" @click="login" v-if="!username">登录</a>
           <a href="/#/order/list" v-if="username">我的订单</a>
-          <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{0}})</a>
+          <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
         </div>
       </div>
     </div>
@@ -112,23 +112,28 @@
   </div>
 </template>
 <script>
+import {mapState} from 'vuex'
   export default{
     name:'nav-header',
     data(){
       return {
-        username:'',
+        // username:this.$store.state.username,
         productList:[]
       }
     },
     mounted(){
+      
       this.getProductList();
     },
-    // filters:{
-    //   priceFormat(val) {
-    //     if(!val) return '0.00';
-    //     return '￥'+ val.toFixed(2) + '元';
-    //   }
-    // },
+    computed:{
+      ...mapState(['username','cartCount']),
+      // username(){
+      //   return this.$store.state.username;
+      // },
+      // cartCount(){
+      //    return this.$store.state.cartCount;
+      // }
+    },
     methods:{
       getProductList(){
         this.$axios.get('/products',{
